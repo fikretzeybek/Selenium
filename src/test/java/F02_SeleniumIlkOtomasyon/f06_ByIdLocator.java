@@ -11,38 +11,47 @@ public class f06_ByIdLocator {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver", "src/resources/chromedriver.exe");
+        System.setProperty("Webdriver.chrome.driver", "src/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-
+        // testotomasyonu.com adresine gidin
         driver.get("https://www.testotomasyonu.com");
 
-        WebElement aramaKutusu = driver.findElement(By.id("global-search"));
 
+        // bir webelementi kullanmak istiyorsak
+        // oncelikle driver'a o elementi buldurup
+        // kullanabilecegimiz bir obje olarak kaydetmeliyiz
+
+        WebElement aramaKutusu = driver.findElement(By.id("global-search"));
+        // arama kutusuna phone yazip arattirin
         aramaKutusu.sendKeys("phone");
 
         aramaKutusu.submit();
 
-        WebElement sonuYaziElementi = driver.findElement(By.className("product-count-text"));
-        System.out.println(sonuYaziElementi.getText());
+        // bulunan sonuc sayisini yazdirin
 
-        String sonucSayisiStr = sonuYaziElementi.getText().replaceAll("\\D","");
+        WebElement sonucYaziElementi = driver.findElement(By.className("product-count-text"));
+
+        // System.out.println(sonucYaziElementi);
+        // Webelementler direk yazdirilamaz
+        // Eger webelement uzerindeki yaziyi elde etmek istersek
+        System.out.println(sonucYaziElementi.getText()); // 4 Products Found
+
+        // Arama sonucunda urun bulunabildigini test edin
+
+        String sonucSayisiStr = sonucYaziElementi.getText().replaceAll("\\D", "");
 
         int sonucSayisiInt = Integer.parseInt(sonucSayisiStr);
 
-        if (sonucSayisiInt > 0){
+        if (sonucSayisiInt > 0) {
             System.out.println("Arama testi PASSED");
-        }else{
+        } else {
             System.out.println("Arama testi FAILED");
         }
 
-
-
-
         Thread.sleep(2000);
         driver.quit();
-
     }
 }

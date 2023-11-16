@@ -3,7 +3,7 @@ package F02_SeleniumIlkOtomasyon;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class f03_ {
+public class f03_getMethodlari {
 
     public static void main(String[] args) throws InterruptedException {
          /*
